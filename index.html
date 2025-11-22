@@ -1,30 +1,610 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidharth Thombrakudiyil Biju | Digital Marketing Specialist</title>
-    <meta name="description" content="Digital Marketer & Founder of Anreid Digital. Expert in content strategy, paid media, social media marketing, and performance optimization." />
-    <meta name="author" content="Sidharth Thombrakudiyil Biju" />
-    <meta name="keywords" content="digital marketing, social media strategy, performance marketing, content creation, Meta Ads, Google Ads, SEO" />
-
-    <meta property="og:title" content="Sidharth Thombrakudiyil Biju | Digital Marketing Specialist" />
-    <meta property="og:description" content="Digital Marketer & Founder of Anreid Digital. Expert in content strategy, paid media, and performance optimization." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://i.postimg.cc/856ddctC/IMG-60053.jpg" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sidharth Thombrakudiyil Biju | Digital Marketing Specialist" />
-    <meta name="twitter:description" content="Digital Marketer & Founder of Anreid Digital. Expert in content strategy, paid media, and performance optimization." />
-    <meta name="twitter:image" content="https://i.postimg.cc/856ddctC/IMG-60053.jpg" />
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
+    
+    <style>
+        :root {
+            --primary: #A481EB; /* Brighter purple for accents */
+            --primary-gradient-start: #8B5CF6;
+            --primary-gradient-end: #6A34E3;
+            --bg: #0C0C0C;
+            --border: #222222;
+            --text-primary: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --card-bg: #111111;
+        }
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+        }
+
+        /* --- Scroll Progress Bar --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- Button Gradient & Pulse --- */
+        .btn-primary {
+            @apply bg-gradient-to-r from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)] text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[var(--primary-gradient-start)]/30;
+        }
+        
+        .btn-primary-pulse {
+            animation: pulse-glow 3s infinite ease-out;
+        }
+
+        .btn-secondary {
+             @apply border border-[var(--border)] text-[var(--text-primary)] font-semibold px-6 py-3 rounded-full transition-all duration-300 hover:bg-[var(--card-bg)] hover:border-[var(--primary)];
+        }
+
+        /* --- Card Styles with Glow Hover --- */
+        .card {
+            @apply bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-6 transition-all duration-500 relative overflow-hidden;
+        }
+
+        /* Sheen Swipe Removed */
+
+        .card-hover {
+            @apply hover:border-[var(--primary)] hover:-translate-y-2 hover:shadow-xl hover:shadow-[var(--primary-gradient-start)]/10;
+        }
+        
+        .contact-link-hover {
+             @apply transition-transform duration-200 ease-out hover:-translate-y-1 hover:text-[var(--primary)];
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rollInDot {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) rotate(-360deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        .animate-rollInDot {
+            animation: rollInDot 1.2s ease-out forwards;
+            animation-delay: 0.6s; 
+            opacity: 0; 
+            display: inline-block; 
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0px var(--primary-gradient-start);
+            }
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 15px 10px rgba(139, 92, 246, 0);
+            }
+        }
+        
+        .opacity-0 { opacity: 0; }
+        .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* Staggered Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* Floating Shapes (Background) */
+        .floating-shape {
+            position: absolute;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.15; 
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+            filter: blur(60px); /* Increased blur for smoother look */
+        }
+        .shape-1 { width: 400px; height: 400px; top: -10%; left: -10%; animation-duration: 25s; }
+        .shape-2 { width: 300px; height: 300px; bottom: 10%; right: -5%; animation-duration: 18s; animation-delay: 2s; }
+        .shape-3 { width: 200px; height: 200px; top: 40%; right: 10%; animation-duration: 22s; animation-delay: 5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
+        }
+
+        /* Reveal on Scroll */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform, opacity; /* Performance hint for the browser */
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px; /* Arbitrary large height */
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg)] text-[var(--text-primary)] selection:bg-[var(--primary)] selection:text-white">
+    
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/80 backdrop-blur-lg border-b border-[var(--border)]">
+        <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo / Name -->
+                <a href="#" class="text-xl md:text-2xl font-bold text-[var(--text-primary)] hover:text-[var(--primary)] transition-colors">Sidharth Thombrakudiyil Biju</a>
+                
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">About</a>
+                    <a href="#services" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Services</a>
+                    <a href="#portfolio" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Work</a>
+                    <a href="#testimonials" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Testimonials</a>
+                </div>
+                
+                <!-- CTA Button -->
+                <a href="#contact" class="hidden md:inline-flex btn-primary">
+                    Get in Touch
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="md:hidden bg-[var(--card-bg)] border-t border-[var(--border)]">
+                <div class="flex flex-col space-y-4 p-6">
+                    <a href="#about" class="mobile-link text-base font-medium text-[var(--text-secondary)] hover:text-[var(--primary)]">About</a>
+                    <a href="#services" class="mobile-link text-base font-medium text-[var(--text-secondary)] hover:text-[var(--primary)]">Services</a>
+                    <a href="#portfolio" class="mobile-link text-base font-medium text-[var(--text-secondary)] hover:text-[var(--primary)]">Work</a>
+                    <a href="#testimonials" class="mobile-link text-base font-medium text-[var(--text-secondary)] hover:text-[var(--primary)]">Testimonials</a>
+                    <a href="#contact" class="mobile-link btn-primary text-center inline-block w-full">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 md:pt-48 md:pb-32 text-center relative overflow-hidden">
+        <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+            <!-- Floating Shapes -->
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            
+            <!-- Hero Content -->
+            <div class="relative z-10">
+                <!-- Added gradient span for the text -->
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 opacity-0 animate-fadeInUp delay-200 tracking-tight">
+                    <span class="bg-gradient-to-r from-white via-purple-200 to-[var(--primary)] text-transparent bg-clip-text">Hi, I'm Sidharth</span><span class="animate-rollInDot text-[var(--primary)]">.</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl font-light text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto opacity-0 animate-fadeInUp delay-300 leading-relaxed">
+                    Digital Marketer | Social Media Strategist | PR & Communications
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm sm:text-base opacity-0 animate-fadeInUp delay-400">
+                    <a href="#contact" class="btn-primary w-full sm:w-auto text-center">Get in Touch</a>
+                    <a href="https://drive.google.com/file/d/1mOAPFedY6AaVRDWDSetjKin-sjcb5TZM/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full sm:w-auto text-center">
+                        View Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 md:mt-24 opacity-0 animate-fadeInUp delay-500" id="stats-section">
+                <div class="card text-center bg-[var(--card-bg)]/50 backdrop-blur-sm">
+                    <span id="count-1" class="text-4xl md:text-5xl font-bold text-[var(--primary)]">0+</span>
+                    <p class="text-[var(--text-secondary)] mt-2 text-sm uppercase tracking-widest">Years Experience</p>
+                </div>
+                <div class="card text-center bg-[var(--card-bg)]/50 backdrop-blur-sm">
+                    <span id="count-2" class="text-4xl md:text-5xl font-bold text-[var(--primary)]">0+</span>
+                    <p class="text-[var(--text-secondary)] mt-2 text-sm uppercase tracking-widest">Projects Completed</p>
+                </div>
+                <div class="card text-center bg-[var(--card-bg)]/50 backdrop-blur-sm">
+                    <span id="count-3" class="text-4xl md:text-5xl font-bold text-[var(--primary)]">0+</span>
+                    <p class="text-[var(--text-secondary)] mt-2 text-sm uppercase tracking-widest">Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="space-y-24 md:space-y-32 pb-24">
+        <!-- About Me Section -->
+        <section id="about" class="reveal-on-scroll">
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <div class="card p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                    <!-- Text Content (left side) -->
+                    <div class="md:w-1/2 text-left order-2 md:order-1">
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-[var(--text-primary)] mb-6">About Me</h2>
+                        <p class="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed mb-6">
+                            I am a Digital Marketer and Founder of Anreid Digital, with
+                            expertise in content strategy, paid media, and performance optimisation. I
+                            focus on creating content that resonates, campaigns that deliver, and
+                            strategies that balance creativity with proven marketing principles. 
+                        </p>
+                        <p class="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed">
+                            My experience spans SMEs, international brands, and higher
+                            education, where I have helped organisations strengthen their presence and
+                            build meaningful connections with their audiences. Feel free to take a stroll
+                            through some of my selected works.
+                        </p>
+                    </div>
+                    <!-- Image (right side) -->
+                    <div class="md:w-1/2 flex justify-center md:justify-end order-1 md:order-2">
+                        <div class="relative group">
+                            <!-- Decorative border element -->
+                            <div class="absolute -inset-2 bg-gradient-to-r from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)] rounded-2xl opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                            <img src="https://i.postimg.cc/856ddctC/IMG-60053.jpg" alt="Sidharth T. Biju" class="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-xl border-2 border-[var(--bg)] shadow-2xl transform transition duration-500 group-hover:scale-[1.01]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="reveal-on-scroll">
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-5xl font-bold text-[var(--primary)] mb-12 text-center">My Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service 1 -->
+                    <div class="card card-hover p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Strategy & Management</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Social Media Strategy, Campaign Planning, & A/B Testing</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="card card-hover p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Performance Marketing</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Meta Ads, Google Ads (PPC), SEO & Content Marketing</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="card card-hover p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Content Production</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Content Creation (Adobe Suite, DaVinci Resolve) & Video Production</p>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="card card-hover p-8">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Analytics & Reporting</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Social Media Analytics, GA4, & Meta Ads Manager Reporting</p>
+                    </div>
+                    <!-- Service 5 -->
+                    <div class="card card-hover p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Email & CRM</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Email Marketing Automation & CRM Management (HubSpot, Mailchimp)</p>
+                    </div>
+                    <!-- Service 6 -->
+                    <div class="card card-hover p-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[var(--primary)] mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                        <h3 class="font-semibold text-xl text-[var(--text-primary)] mb-3">Chatbots & Automation</h3>
+                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">Automated Chatbots & Custom n8n Workflow Integration</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section (Full Width Background) -->
+        <!-- Removed 'reveal-on-scroll' from the main section container to prevent heavy layout thrashing -->
+        <section id="portfolio" class="bg-white py-16 md:py-24 rounded-[2rem] mx-4 md:mx-0">
+            <!-- Centered Content Wrapper -->
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <!-- Added reveal-on-scroll here instead -->
+                <h2 class="reveal-on-scroll text-3xl md:text-5xl font-bold text-[var(--bg)] mb-12 text-center">Selected Works</h2>
+                
+                <!-- Projects Container (Single Column Vertical Stack) -->
+                <!-- Added reveal-on-scroll here to animate the cards smoothly -->
+                <div class="reveal-on-scroll max-w-4xl mx-auto space-y-16">
+                    
+                    <!-- Project 1: Performance Marketing -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <!-- Added loading="lazy" for performance -->
+                            <img loading="lazy" src="https://i.postimg.cc/4Nn0NBqb/NESTLO-(9).png" alt="Performance Marketing Project" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100">
+                            <h3 class="text-xl md:text-2xl font-semibold group-hover:text-[var(--primary-gradient-start)] transition-colors">Performance Marketing (Screenshot from Google Ads Account)</h3>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Social Media Designs -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <img loading="lazy" src="https://i.postimg.cc/T36HqfhZ/NESTLO-(6).png" alt="Social Media Designs Project" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100">
+                            <h3 class="text-xl md:text-2xl font-semibold group-hover:text-[var(--primary-gradient-start)] transition-colors">Social Media Designs</h3>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Web Development -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <img loading="lazy" src="https://i.postimg.cc/13sJVBj5/NESTLO-(7).png" alt="Web Development Project" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100">
+                            <h3 class="text-xl md:text-2xl font-semibold group-hover:text-[var(--primary-gradient-start)] transition-colors">Web Development</h3>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Branding -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <img loading="lazy" src="https://i.postimg.cc/qqZ46gk0/NESTLO-(1200-x-900-px).jpg" alt="Branding Project" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100">
+                            <h3 class="text-xl md:text-2xl font-semibold group-hover:text-[var(--primary-gradient-start)] transition-colors">Branding (concept brand)</h3>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Event Photography -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <img loading="lazy" src="https://i.postimg.cc/9MLjszwr/NESTLO-(8).png" alt="Event Photography Project" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100">
+                            <h3 class="text-xl md:text-2xl font-semibold group-hover:text-[var(--primary-gradient-start)] transition-colors">Event Photography (Pictures from University of Leeds)</h3>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Data Science Blog -->
+                    <div class="card bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 p-0 text-[var(--bg)] flex flex-col overflow-hidden group">
+                        <div class="overflow-hidden">
+                            <img loading="lazy" src="https://i.postimg.cc/L8G6qQDQ/1-THp-VQz-ZX0Rc-V1SRCn-Mi-Kw.webp" alt="Data Science Blog Post" class="w-full h-auto transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6 border-t border-gray-100 bg-gray-50 group-hover:bg-white transition-colors">
+                            <a href="https://medium.com/horizons-institute/unlocking-the-power-of-data-science-to-improve-wellbeing-in-later-life-d1707c520d1c" target="_blank" rel="noopener noreferrer" class="text-xl md:text-2xl font-semibold text-gray-900 hover:text-[var(--primary-gradient-start)] transition-colors duration-300 flex items-center gap-2">
+                                Read my blog on using Data Science to improve wellbeing in later life
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Case Studies Section -->
+        <section id="case-studies" class="reveal-on-scroll">
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-5xl font-bold text-[var(--text-primary)] mb-12 text-center">Case Studies</h2>
+                <div class="card card-hover p-8 md:p-12 border border-[var(--border)] hover:border-[var(--primary)] transition-colors">
+                    <h3 class="font-semibold text-2xl md:text-3xl text-[var(--text-primary)] mb-4">Project: Revitalising Brand Presence for Bankrupt Beds</h3>
+                    <p class="text-base md:text-lg text-[var(--text-secondary)] mb-6 leading-relaxed">A detailed look into the strategy, execution, and results of a full-scale digital brand launch for a Leeds-based furniture retailer.</p>
+                    <a href="https://drive.google.com/file/d/10WiQQYQP5EasmPK4D6QPGqxRNSS88mO2/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--primary)] hover:text-white hover:bg-[var(--primary)] px-6 py-3 rounded-full border border-[var(--primary)] transition-all duration-300 font-medium">
+                        Read Full Case Study 
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="reveal-on-scroll">
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-5xl font-bold text-[var(--text-primary)] mb-12 text-center">Testimonials</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card card-hover p-8 md:p-10 relative">
+                        <!-- Quotation mark decoration -->
+                        <div class="absolute top-6 left-6 text-6xl text-[var(--border)] font-serif opacity-50 leading-none">"</div>
+                        <p class="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed italic mb-6 relative z-10 pt-4">
+                            "I can't express how grateful I am... With his expertise, we revamped my social media presence and created eye-catching posts... The results have been very good with high volumes of traffic on social media and an an increase in sales."
+                        </p>
+                        <div class="flex items-center gap-4 border-t border-[var(--border)] pt-6">
+                            <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white font-bold">V</div>
+                            <div>
+                                <p class="text-sm font-bold text-[var(--text-primary)]">Vincent Reed</p>
+                                <p class="text-xs text-[var(--text-secondary)]">Founder of Churros Freshly Made</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-hover p-8 md:p-10 relative">
+                        <div class="absolute top-6 left-6 text-6xl text-[var(--border)] font-serif opacity-50 leading-none">"</div>
+                        <p class="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed italic mb-6 relative z-10 pt-4">
+                            "Working with Sidharth was a pleasure. His deep knowledge of performance marketing helped us achieve incredible results. I highly recommend his services to anyone looking to scale their digital presence."
+                        </p>
+                        <div class="flex items-center gap-4 border-t border-[var(--border)] pt-6">
+                            <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-white font-bold">T</div>
+                            <div>
+                                <p class="text-sm font-bold text-[var(--text-primary)]">Tony Singh</p>
+                                <p class="text-xs text-[var(--text-secondary)]">Managing Director, Bankrupt Beds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal-on-scroll">
+            <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+                <div class="card p-12 md:p-20 text-center relative overflow-hidden">
+                    <!-- Background glow effect for contact card -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[var(--primary)] opacity-10 rounded-full blur-3xl"></div>
+                    
+                    <h2 class="relative z-10 text-3xl md:text-5xl font-bold text-[var(--text-primary)] mb-6">Let's work together.</h2>
+                    <p class="relative z-10 text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto">Have a project in mind? Drop a message and let's create something amazing.</p>
+                    
+                    <a href="tel:+447741519675" class="relative z-10 btn-primary btn-primary-pulse inline-flex items-center gap-2 px-8 py-4 text-lg">
+                        Get in Touch
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                    </a>
+                    
+                    <div class="relative z-10 flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-12 text-lg text-[var(--text-secondary)]">
+                        <a href="mailto:siddart17@gmail.com" class="contact-link-hover font-medium hover:text-[var(--text-primary)] flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            Email
+                        </a>
+                        <a href="https://www.linkedin.com/in/sidharththombrakudiyil" target="_blank" rel="noopener noreferrer" class="contact-link-hover font-medium hover:text-[var(--text-primary)] flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            LinkedIn
+                        </a>
+                        <a href="https://wa.me/447741519675" target="_blank" rel="noopener noreferrer" class="contact-link-hover font-medium hover:text-[var(--text-primary)] flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-left mt-24 md:mt-32 py-12 text-[var(--text-secondary)] text-sm border-t border-[var(--border)]">
+        <div class="container mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2024 Sidharth Thombrakudiyil Biju. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+        // --- Scroll Reveal Animation ---
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    scrollObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 
+        });
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((section) => {
+            scrollObserver.observe(section);
+        });
+
+        // --- Count-Up Animation ---
+        const countUp = (el, target) => {
+            let count = 0;
+            const duration = 2000; 
+            const frameRate = 60; 
+            const step = (target / (duration / 1000 * frameRate));
+            
+            const counter = setInterval(() => {
+                count += step;
+                if (count >= target) {
+                    count = target;
+                    clearInterval(counter);
+                }
+                el.innerText = Math.ceil(count) + '+';
+            }, 1000 / frameRate);
+        };
+
+        const statsSection = document.getElementById('stats-section');
+        let hasCounted = false;
+
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasCounted) {
+                    countUp(document.getElementById('count-1'), 3);
+                    countUp(document.getElementById('count-2'), 37);
+                    countUp(document.getElementById('count-3'), 10);
+                    hasCounted = true;
+                    countObserver.unobserve(statsSection);
+                }
+            });
+        }, {
+            threshold: 0.5 
+        });
+
+        if (statsSection) {
+            countObserver.observe(statsSection);
+        }
+
+        // --- Mobile Nav Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+            
+            // Close menu when clicking a link
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
+        
+        // --- Scroll Progress Bar ---
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+        
+    </script>
+</body>
 </html>
