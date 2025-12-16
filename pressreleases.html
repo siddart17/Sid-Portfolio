@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Releases | Siddharth</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter (Standard for modern web portfolios) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Configuration to match the Vercel/Next.js dark theme aesthetic -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // Custom gray scale often used in Vercel-like themes
+                        gray: {
+                            850: '#1f1f1f',
+                            900: '#111111',
+                            950: '#0a0a0a',
+                        },
+                        accent: {
+                            500: '#3b82f6', // subtle blue accent
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a; /* Deep dark background */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Subtle grid background pattern */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Card Hover Glow Effect */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); /* Slight blue glow */
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 bg-grid z-0 pointer-events-none h-[600px]"></div>
+
+    <!-- Navigation / Header -->
+    <nav class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 flex justify-between items-center animate-fade-in">
+        <a href="https://sid-portfolio-phi.vercel.app/" class="text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform">
+                <path d="M19 12H5"/>
+                <path d="M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 flex-grow flex flex-col items-center max-w-2xl mx-auto w-full px-6 pt-12 pb-24">
+        
+        <!-- Header Text -->
+        <header class="mb-12 text-center animate-slide-up" style="animation-delay: 0.1s;">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">
+                Press Releases
+            </h1>
+            <p class="text-gray-400 text-lg">
+                Latest updates, announcements, and featured news.
+            </p>
+        </header>
+
+        <!-- Links Container -->
+        <div class="w-full space-y-4">
+
+            <!-- Link 1 -->
+            <a href="https://drive.google.com/file/d/1vL3fPNdHyERg4hryJjNegrWR3oUqRALi/view?usp=sharing" target="_blank" class="block animate-slide-up" style="animation-delay: 0.2s;">
+                <article class="card-hover group relative rounded-xl border border-gray-800 bg-gray-900/50 p-6 sm:p-8 backdrop-blur-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 text-xs text-gray-500 font-mono uppercase tracking-wider">
+                                <span class="text-accent-500">New</span>
+                                <span>•</span>
+                                <time datetime="2022">2022</time>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-100 group-hover:text-blue-400 transition-colors">
+                                Press Release: Asset Homes
+                            </h2>
+                            <p class="text-sm text-gray-400 max-w-md line-clamp-2">
+                                Speaker M B Rajesh inaugurated the Asset Homes project, which will raise the national flag in 10,000 apartments.
+                            </p>
+                            
+                            <!-- Featured In Section -->
+                            <div class="flex flex-wrap items-center gap-2 pt-1">
+                                <span class="text-xs text-gray-500 font-medium">Featured in:</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Hindu
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Times of India
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Arrow Icon -->
+                        <div class="hidden sm:block text-gray-600 group-hover:text-white transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:translate-x-1 transition-transform">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Link 2 -->
+            <a href="https://drive.google.com/file/d/1q6FHYLi_5rcDITpinImKJ9CDdJYP4MWK/view?usp=sharing" target="_blank" class="block animate-slide-up" style="animation-delay: 0.3s;">
+                <article class="card-hover group relative rounded-xl border border-gray-800 bg-gray-900/50 p-6 sm:p-8 backdrop-blur-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 text-xs text-gray-500 font-mono uppercase tracking-wider">
+                                <time datetime="2023">2023</time>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-100 group-hover:text-blue-400 transition-colors">
+                                Press Release: Farmfed
+                            </h2>
+                            <p class="text-sm text-gray-400 max-w-md line-clamp-2">
+                                Farmfed with Amul Model Launches 9 Curry Powder, Products in Spices, Seafood, and Vegetable Sectors. Brand ambassador Navya Nair inaugurated the market.
+                            </p>
+
+                            <!-- Featured In Section -->
+                            <div class="flex flex-wrap items-center gap-2 pt-1">
+                                <span class="text-xs text-gray-500 font-medium">Featured in:</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Indian Express
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Times of India
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Hindu
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block text-gray-600 group-hover:text-white transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:translate-x-1 transition-transform">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Link 3 -->
+            <a href="https://drive.google.com/file/d/17O8FFudjEHsY_FSCX7ISEJ97ZREM0s83/view?usp=sharing" target="_blank" class="block animate-slide-up" style="animation-delay: 0.4s;">
+                <article class="card-hover group relative rounded-xl border border-gray-800 bg-gray-900/50 p-6 sm:p-8 backdrop-blur-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 text-xs text-gray-500 font-mono uppercase tracking-wider">
+                                <time datetime="2022">2022</time>
+                            </div>
+                            <h2 class="text-xl font-semibold text-gray-100 group-hover:text-blue-400 transition-colors">
+                                Press Release: Turtle Wax
+                            </h2>
+                            <p class="text-sm text-gray-400 max-w-md line-clamp-2">
+                                Turtle Wax to open four more car-care studios in Kerala. The second car-care studio opened in Palakkad.
+                            </p>
+
+                            <!-- Featured In Section -->
+                            <div class="flex flex-wrap items-center gap-2 pt-1">
+                                <span class="text-xs text-gray-500 font-medium">Featured in:</span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Hindu
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-800 border border-gray-700 text-xs text-gray-300 font-medium">
+                                    The Times of India
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block text-gray-600 group-hover:text-white transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:translate-x-1 transition-transform">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-8 text-gray-600 text-sm animate-fade-in">
+        <p>&copy; 2024 Siddharth. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
