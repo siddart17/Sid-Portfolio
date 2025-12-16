@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Coverage | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Deep dark background */
+        }
+
+        /* Custom Scrollbar for Dark Mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        .image-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Custom Dark Palette
+                        dark: {
+                            900: '#0a0a0a', // Main BG
+                            800: '#171717', // Card BG
+                            700: '#262626', // Borders
+                        },
+                        violet: {
+                            500: '#8B5CF6',
+                            400: '#A78BFA',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-900 text-gray-200 min-h-screen flex flex-col">
+
+    <!-- Navigation Bar - Dark Glassmorphism -->
+    <nav class="fixed w-full top-0 z-40 border-b border-white/5 bg-dark-900/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            
+            <!-- Back Button -->
+            <a href="portfolio website 2.html" class="group flex items-center gap-3 text-sm font-medium text-gray-400 hover:text-white transition-colors">
+                <div class="w-8 h-8 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-colors border border-white/5">
+                    <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-0.5 transition-transform text-gray-300"></i>
+                </div>
+                <span>Back to Portfolio</span>
+            </a>
+
+            <!-- Page Title -->
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <h1 class="text-lg font-semibold text-white leading-none tracking-tight">Event Coverage</h1>
+                    <p class="text-[10px] text-gray-500 font-medium uppercase tracking-[0.2em] mt-1.5">Gallery Collection</p>
+                </div>
+            </div>
+
+            <!-- Spacer for alignment -->
+            <div class="w-24 flex justify-end"></div>
+        </div>
+    </nav>
+
+    <!-- Header / Intro -->
+    <div class="mt-20 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <h2 class="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">Event Photography & Podcast Videography at the <span class="text-gray-500">University of Leeds</span></h2>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <main class="flex-grow bg-dark-900 relative">
+        <!-- Subtle gradient background effect -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-violet-500/5 via-dark-900 to-dark-900 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-dark-900 border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-gray-600 text-sm">© 2024 Event Coverage Gallery.</p>
+            
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white/50 hover:text-white text-4xl transition-colors focus:outline-none z-50">
+            &times;
+        </button>
+        <button id="lightbox-prev" class="absolute left-4 md:left-10 text-white/50 hover:text-white text-3xl md:text-5xl transition-colors focus:outline-none p-4 z-50">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button id="lightbox-next" class="absolute right-4 md:right-10 text-white/50 hover:text-white text-3xl md:text-5xl transition-colors focus:outline-none p-4 z-50">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        
+        <div class="max-w-6xl max-h-[90vh] p-4 relative flex flex-col items-center w-full">
+            <img id="lightbox-img" src="" alt="Full size" class="max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-white/10">
+            <div class="mt-6 text-center">
+                <h3 id="lightbox-title" class="text-white text-xl font-medium tracking-wide"></h3>
+                <span id="lightbox-cat" class="text-violet-400 text-xs font-bold uppercase tracking-widest mt-2 block opacity-70"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ------------------------------------------------------------------
+        // CONFIGURATION: ADD YOUR OWN IMAGES HERE
+        // ------------------------------------------------------------------
+        const galleryData = [
+            // Image 1
+            { 
+                thumb: "https://i.postimg.cc/DzXnvg0b/Ad-L-event-(2-of-26).jpg", 
+                full: "https://i.postimg.cc/DzXnvg0b/Ad-L-event-(2-of-26).jpg",
+                 
+            },
+            // Image 2
+            { 
+                thumb: "https://i.postimg.cc/jjPY0S3d/Ad-L-event-(3-of-26).jpg", 
+                full: "https://i.postimg.cc/jjPY0S3d/Ad-L-event-(3-of-26).jpg",
+                
+            },
+            // Image 3
+            { 
+                thumb: "https://i.postimg.cc/W38KTFGp/Ad-L-event-(4-of-26).jpg", 
+                full: "https://i.postimg.cc/W38KTFGp/Ad-L-event-(4-of-26).jpg",
+                
+            },
+            // Image 4
+            { 
+                thumb: "https://i.postimg.cc/Qx26Lk2K/Ad-L-event-(16-of-26).jpg", 
+                full: "https://i.postimg.cc/Qx26Lk2K/Ad-L-event-(16-of-26).jpg",
+                
+            },
+            // Image 5
+            { 
+                thumb: "https://i.postimg.cc/dVRg4xh6/Ad-L-event-(26-of-26).jpg", 
+                full: "https://i.postimg.cc/dVRg4xh6/Ad-L-event-(26-of-26).jpg",
+                
+            },
+            // Image 6
+            { 
+                thumb: "https://i.postimg.cc/WpFNXsTr/Ad-L-event-(18-of-26).jpg", 
+                full: "https://i.postimg.cc/WpFNXsTr/Ad-L-event-(18-of-26).jpg",
+               
+            },
+            // Image 7
+            { 
+                thumb: "https://i.postimg.cc/L41Sjv3N/Whats-App-Image-2025-12-14-at-15-53-02-cd89d8ef.jpg", 
+                full: "https://i.postimg.cc/L41Sjv3N/Whats-App-Image-2025-12-14-at-15-53-02-cd89d8ef.jpg",
+               
+            },
+            // Image 8
+            { 
+                thumb: "https://i.postimg.cc/9f050BfD/Whats-App-Image-2025-12-14-at-15-53-15-09c69d10.jpg", 
+                full: "https://i.postimg.cc/9f050BfD/Whats-App-Image-2025-12-14-at-15-53-15-09c69d10.jpg",
+             
+            },
+            // Image 9
+            { 
+                thumb: "https://i.postimg.cc/Fzjw8WPN/Whats-App-Image-2025-12-14-at-15-53-27-a64e06fb.jpg", 
+                full: "https://i.postimg.cc/Fzjw8WPN/Whats-App-Image-2025-12-14-at-15-53-27-a64e06fb.jpg",
+             
+            },
+            
+         
+        ];
+
+        const galleryGrid = document.getElementById('gallery-grid');
+        
+        function renderGallery() {
+            let html = '';
+            
+            galleryData.forEach((item, index) => {
+                const delay = (index % 8) * 100; 
+
+                html += `
+                    <div class="image-card group relative bg-dark-800 rounded-lg overflow-hidden border border-white/5 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-violet-500/10 cursor-pointer" 
+                         style="animation-delay: ${delay}ms"
+                         onclick="openLightbox(${index})">
+                        
+                        <div class="relative overflow-hidden aspect-[4/3]">
+                            <div class="absolute inset-0 bg-white/5 animate-pulse z-0"></div>
+                            <img src="${item.thumb}" 
+                                 alt="${item.title || ''}" 
+                                 loading="lazy"
+                                 class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out relative z-10 opacity-90 group-hover:opacity-100"
+                                 onload="this.previousElementSibling.style.display='none'">
+                            
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex items-center justify-center">
+                                <div class="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white transform scale-50 group-hover:scale-100 transition-transform duration-300">
+                                    <i class="fa-solid fa-expand text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            galleryGrid.innerHTML = html;
+        }
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxCat = document.getElementById('lightbox-cat');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxContent();
+            lightbox.classList.remove('hidden');
+            setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => lightbox.classList.add('hidden'), 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateLightboxContent() {
+            const item = galleryData[currentIndex];
+            
+            lightboxImg.style.opacity = "0.5";
+            const tempImg = new Image();
+            tempImg.src = item.full; 
+            tempImg.onload = () => {
+                lightboxImg.src = item.full;
+                lightboxImg.style.opacity = "1";
+            };
+
+            lightboxTitle.textContent = item.title || '';
+            lightboxCat.textContent = item.category || '';
+        }
+
+        function nextImage(e) {
+            if(e) e.stopPropagation();
+            currentIndex = (currentIndex + 1) % galleryData.length;
+            updateLightboxContent();
+        }
+
+        function prevImage(e) {
+            if(e) e.stopPropagation();
+            currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length;
+            updateLightboxContent();
+        }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.getElementById('lightbox-next').addEventListener('click', nextImage);
+        document.getElementById('lightbox-prev').addEventListener('click', prevImage);
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        renderGallery();
+    </script>
+</body>
+</html>
