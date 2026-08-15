@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics & Data | Sidharth Thombrakudiyil Biju</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Configuration for Tailwind to match Google's aesthetic -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        google: {
+                            bg: '#202124',      /* Google Dark Theme Background */
+                            surface: '#303134', /* Google Dark Theme Surface */
+                            blue: '#4285F4',    /* Google Blue */
+                            red: '#EA4335',     /* Google Red */
+                            yellow: '#FBBC05',  /* Google Yellow */
+                            green: '#34A853',   /* Google Green */
+                            text: '#E8EAED',    /* Primary Text */
+                            muted: '#9AA0A6',   /* Secondary Text */
+                            border: '#5F6368'   /* Border Color */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar matching Google Dark Mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #202124; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5F6368; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9AA0A6; 
+        }
+
+        /* Animation classes for scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Google multi-color gradient border utility */
+        .google-gradient-border {
+            position: relative;
+        }
+        .google-gradient-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4285F4 25%, #EA4335 25%, #EA4335 50%, #FBBC05 50%, #FBBC05 75%, #34A853 75%);
+        }
+    </style>
+</head>
+<body class="bg-google-bg text-google-text font-sans antialiased overflow-x-hidden selection:bg-google-blue selection:text-white">
+
+    <!-- Simple Navigation -->
+    <nav class="fixed w-full z-50 bg-google-bg/90 backdrop-blur-md border-b border-google-border transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center">
+            <a href="#" class="text-white font-bold text-xl tracking-tight">Analytics<span class="text-google-blue">.</span></a>
+            <a href="#" class="text-sm font-medium text-google-muted hover:text-white transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 lg:pt-40 lg:pb-28 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="max-w-3xl reveal">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-google-surface border border-google-border text-google-text text-xs font-semibold tracking-wide uppercase shadow-sm">
+                <span class="text-google-blue">G</span><span class="text-google-red">o</span><span class="text-google-yellow">o</span><span class="text-google-blue">g</span><span class="text-google-green">l</span><span class="text-google-red">e</span> Ads & Analytics
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+                Analytics and Data
+            </h1>
+            <p class="text-lg md:text-xl text-google-text leading-relaxed mb-8">
+                Data is the foundation of every successful digital strategy. It takes the guesswork out of communications and allows us to see exactly how audiences are interacting with a brand.
+            </p>
+            <p class="text-base text-google-muted leading-relaxed">
+                Below is a deep dive into my analytics and performance marketing work for <strong>Evergreen Homestay</strong>. This case study demonstrates how I use data to build tracking infrastructures, drive visibility, and successfully compete in highly crowded digital markets.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 pb-32 space-y-32">
+        
+        <!-- Section 1: GTM Setup (Google Blue Accent) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+            <div class="order-2 lg:order-1">
+                <div class="relative group rounded-2xl overflow-hidden border border-google-border shadow-2xl bg-google-surface p-1 google-gradient-border">
+                    <img src="https://i.postimg.cc/CLNCb8PC/Screenshot-2026-08-04-215232.png" alt="Google Tag Manager Implementation" class="w-full h-auto object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700">
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 space-y-6">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-google-blue/10 text-google-blue font-bold font-mono text-sm border border-google-blue/30">01</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Technical Implementation: Google Tag Manager</h2>
+                </div>
+                <p class="text-google-muted leading-relaxed">
+                    Reliable analytics start with accurate tracking. Before spending any marketing budget, I designed and implemented a comprehensive tracking environment for <code class="bg-google-surface px-1.5 py-0.5 rounded text-google-text font-mono text-sm border border-google-border">evergreenhomestay.online</code> using Google Tag Manager (GTM).
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    As shown in my diagnostic workflows, I configured the Conversion Linker and <strong class="text-google-blue">Google Analytics 4 (GA4)</strong> tags to fire accurately across the site. Beyond basic page views, I built custom event tags to track specific, high-value user actions—such as clicks out to Online Travel Agencies (OTAs) and direct phone calls. This precise technical foundation ensured that every digital touchpoint was measurable and every campaign could be tied directly to a return on investment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Long-Term Performance (Google Yellow & Green Accents) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+            <div class="order-1 lg:order-1 space-y-6">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-google-yellow/10 text-google-yellow font-bold font-mono text-sm border border-google-yellow/30">02</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Long-Term Campaign Performance</h2>
+                </div>
+                <p class="text-google-muted leading-relaxed">
+                    Managing search campaigns requires a constant balancing act between reach and efficiency. Over a sustained period, my Google Ads strategies generated <strong class="text-white bg-google-surface px-2 py-1 rounded">252,000 impressions</strong> and drove <strong class="text-white bg-google-surface px-2 py-1 rounded">15,200 clicks</strong> to the homestay’s website.
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    By continuously refining audience targeting, keyword selection, and ad copy, I maintained a highly competitive Click-Through Rate (CTR) of <strong class="text-google-yellow text-xl">6.03%</strong>. More importantly, I kept the campaigns incredibly cost-effective, achieving an Average Cost Per Click (CPC) of just <strong class="text-google-green text-xl">₹1.40</strong>. This proves that high-intent traffic can be acquired efficiently with the right data-led optimisations.
+                </p>
+            </div>
+            <div class="order-2 lg:order-2">
+                <div class="relative group rounded-2xl overflow-hidden border border-google-border shadow-2xl bg-google-surface p-1 google-gradient-border">
+                    <img src="https://i.postimg.cc/7Yx0P6Hj/Screenshot-2026-08-10-222413.png" alt="Google Ads Campaign Overview" class="w-full h-auto object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Market Share (Google Red Accent) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+            <div class="order-2 lg:order-1">
+                <div class="relative group rounded-2xl overflow-hidden border border-google-border shadow-2xl bg-google-surface p-1 google-gradient-border">
+                    <img src="https://i.postimg.cc/0QRKT5XK/Screenshot-2026-08-10-111843.png" alt="Auction Insights" class="w-full h-auto object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700">
+                </div>
+            </div>
+            <div class="order-1 lg:order-2 space-y-6">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-google-red/10 text-google-red font-bold font-mono text-sm border border-google-red/30">03</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Securing Market Share Against Industry Giants</h2>
+                </div>
+                <p class="text-google-muted leading-relaxed">
+                    The hospitality sector is notoriously fierce, dominated by massive OTAs with virtually unlimited marketing budgets. However, smart data application allows independent businesses to carve out their own space and compete directly.
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    My Auction Insights analysis reveals that Evergreen Homestay secured a <strong class="text-google-red text-xl">17.82%</strong> impression share in the search network. We successfully held our ground alongside global giants like Booking.com, Agoda, and Airbnb. 
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    Furthermore, the data shows we actively outranked major regional platforms like MakeMyTrip and Goibibo. By identifying competitive landscape shifts early, I adjusted our bidding strategies to drive a month-over-month impression share increase from 0% to 18%, capturing vital visibility just as new competitors entered the market.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: Business Outcomes (Google Green Accent) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+            <div class="order-1 lg:order-1 space-y-6">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-google-green/10 text-google-green font-bold font-mono text-sm border border-google-green/30">04</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Tracking Real Business Outcomes</h2>
+                </div>
+                <p class="text-google-muted leading-relaxed">
+                    Ultimately, the goal of analytics is to prove tangible business impact, not just measure website traffic. I mapped the entire digital user journey to track over <strong class="text-white bg-google-surface px-2 py-1 rounded">1,400 total conversion actions</strong>.
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    This comprehensive setup tracked diverse user intents, from map directions and lead forms to website interactions. Crucially, it successfully attributed <strong class="text-google-green text-xl">229 direct phone calls</strong> specifically to the Google Business Profile and connected ads. 
+                </p>
+                <p class="text-google-muted leading-relaxed">
+                    By segmenting these conversion sources, I provided clear, actionable visibility into exactly which digital efforts were putting heads in beds and driving real-world revenue.
+                </p>
+            </div>
+            <div class="order-2 lg:order-2">
+                <div class="relative group rounded-2xl overflow-hidden border border-google-border shadow-2xl bg-google-surface p-1 google-gradient-border">
+                    <img src="https://i.postimg.cc/zfmfBtwD/Screenshot-2026-08-04-223444.png" alt="Conversion Tracking Dashboard" class="w-full h-auto object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-google-border bg-google-surface py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center">
+            <p class="text-sm text-google-muted">
+                &copy; <span id="year"></span> Sidharth Thombrakudiyil Biju. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Intersection Observer for Scroll Animations -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll reveal animation logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>
