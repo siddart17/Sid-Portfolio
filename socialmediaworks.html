@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Works | Sidharth</title>
+    <title>Design Works | Sidharth</title>
     <style>
         /* --- 1. DESIGN TOKENS & VARIABLES --- */
         :root {
@@ -11,7 +11,9 @@
             --bg-color: #0a0a0a;       /* Very deep black/grey */
             --text-primary: #ffffff;    /* Pure white */
             --text-secondary: #a1a1aa;  /* Muted grey for subtitles */
-            --accent-color: #3b82f6;    /* Bright Blue accent (tweak as needed) */
+            
+            /* Gradient Accent inspired by Canva (Purple/Cyan) & Adobe (Red) */
+            --accent-gradient: linear-gradient(135deg, #00C4CC, #7D2AE8, #FF0000);
             
             /* Card Settings */
             --card-bg: #171717;         /* Slightly lighter than background */
@@ -66,10 +68,11 @@
         }
 
         h1 span {
-            display: block;
-            color: transparent;
-            -webkit-text-stroke: 1px var(--text-primary);
-            opacity: 0.8;
+            display: inline-block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header-meta {
@@ -115,8 +118,6 @@
             z-index: 2;
         }
 
-        /* Removed specific grid spans to ensure uniform aspect ratio */
-
         /* Image Styling */
         .card img {
             width: 100%;
@@ -161,10 +162,14 @@
 
         .card-tags {
             font-size: 0.85rem;
-            color: var(--accent-color);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
         }
 
         /* --- 5. NAVIGATION / FOOTER --- */
@@ -198,10 +203,10 @@
     <!-- Header -->
     <header>
         <div>
-            <h1>Social<span>Portfolio</span></h1>
+            <h1>Design <span>Portfolio</span></h1>
         </div>
         <div class="header-meta">
-            <p>A visual archive of social media campaigns, content strategies, and digital storytelling crafted for diverse audiences.</p>
+            <p>A collection of creative assets, marketing materials, and digital graphics built with Canva and Adobe Express.</p>
         </div>
     </header>
 
@@ -214,12 +219,30 @@
            2. All cards are now uniform size.
         -->
 
+        <!-- New Card 1 -->
+        <div class="card">
+            <img src="https://i.postimg.cc/v8XLV9S2/1.png" alt="Abstract Design">
+            <div class="card-info">
+                <div class="card-title">Logo Creation</div>
+                <div class="card-tags">Digital Art</div>
+            </div>
+        </div>
+
+        <!-- New Card 2 -->
+        <div class="card">
+            <img src="https://i.postimg.cc/DyMrChh1/Screenshot-2026-08-10-224427.png" alt="UI Design">
+            <div class="card-info">
+                <div class="card-title">Presentation Design</div>
+                <div class="card-tags">Canva</div>
+            </div>
+        </div>
+
         <!-- 1. Standard Card -->
         <div class="card">
             <img src="https://i.postimg.cc/9QT9nzqj/Chat-GPT-Image-Aug-23-2025-05-27-21-PM.png" alt="Viral Campaign">
             <div class="card-info">
-                <div class="card-title">Brand Content Strategy</div>
-                <div class="card-tags">Content Creation</div>
+                <div class="card-title">Brand Identity Concept</div>
+                <div class="card-tags">Canva Pro</div>
             </div>
         </div>
 
@@ -227,8 +250,8 @@
         <div class="card">
             <img src="https://i.postimg.cc/MG5vCBZn/20250824-1823-Timeless-Style-Showcase-simple-compose-01k3ehmnnnfz5tp1skb4b30q36.png" alt="Mobile Content">
             <div class="card-info">
-                <div class="card-title">Brand Content Strategy</div>
-                <div class="card-tags">Content Creation</div>
+                <div class="card-title">Fashion Lookbook Layout</div>
+                <div class="card-tags">Adobe Express</div>
             </div>
         </div>
 
@@ -236,53 +259,35 @@
         <div class="card">
             <img src="https://i.postimg.cc/yYTxg99f/Chat-GPT-Image-Aug-23-2025-05-27-28-PM.png" alt="Social Post">
             <div class="card-info">
-                <div class="card-title">Brand Content Strategy</div>
-                <div class="card-tags">Content Creation</div>
+                <div class="card-title">Social Media Template</div>
+                <div class="card-tags">Canva Pro</div>
             </div>
         </div>
 
         <!-- 4. Standard Card -->
         <div class="card">
-            <img src="https://i.postimg.cc/RFzxLpxh/ice-cream-strwaberyy.png" alt="Graphic Design">
+            <img src="https://i.postimg.cc/RFzxLpxh/ice-cream-strwaberyy.png" alt="Planning">
             <div class="card-info">
-                <div class="card-title">Social Media Promotions</div>
-                <div class="card-tags">Graphic Design</div>
+                <div class="card-title">Product Promotion Ad</div>
+                <div class="card-tags">Adobe Express</div>
             </div>
         </div>
 
         <!-- 5. Standard Card -->
         <div class="card">
-            <img src="https://i.postimg.cc/VsCCpNhZ/555.png" alt="Graphic Design">
+            <img src="https://i.postimg.cc/Yq0ZYBLY/Whats-App-Image-2025-07-17-at-10-04-57-4bc75556.jpg" alt="Office Work" style="object-fit: contain; background-color: #000;">
             <div class="card-info">
-                <div class="card-title">Social Media Concept Ad </div>
-                <div class="card-tags">Graphic Design</div>
+                <div class="card-title">Campaign Visuals</div>
+                <div class="card-tags">Digital Art</div>
             </div>
         </div>
 
         <!-- 6. Standard Card -->
         <div class="card">
-            <img src="https://i.postimg.cc/fbfB180Y/888.png" alt="Graphic Design">
+            <img src="https://i.postimg.cc/fbfB180Y/888.png" alt="Event">
             <div class="card-info">
-                <div class="card-title">Social Media Concept Ad</div>
-                <div class="card-tags">Graphic Design</div>
-            </div>
-        </div>
-
-        <!-- 7. Standard Card -->
-        <div class="card">
-            <img src="https://i.postimg.cc/J0NcL7pd/Untitled-(21)32.png" alt="Ad Creatives">
-            <div class="card-info">
-                <div class="card-title">Ad Creatives </div>
-                <div class="card-tags">Paid Media</div>
-            </div>
-        </div>
-
-        <!-- 8. New Card -->
-        <div class="card">
-            <img src="https://i.postimg.cc/bJzqT3KZ/Untitled-(21)3222.png" alt="Analytics">
-            <div class="card-info">
-                <div class="card-title">Ad Creatives</div>
-                <div class="card-tags">Paid Media </div>
+                <div class="card-title">Event Promotional Graphic</div>
+                <div class="card-tags">Canva Pro</div>
             </div>
         </div>
 
@@ -290,35 +295,8 @@
         <div class="card">
             <img src="https://i.postimg.cc/85Cqc32m/Untitled-(21).png" alt="Ad Creatives">
             <div class="card-info">
-                <div class="card-title">Ad Creatives</div>
-                <div class="card-tags">Paid Media</div>
-            </div>
-        </div>
-
-        <!-- 10. New Card -->
-        <div class="card">
-            <img src="https://i.postimg.cc/kXF3jxvG/image26.png" alt="Analytics">
-            <div class="card-info">
-                <div class="card-title">Social Media Analytics</div>
-                <div class="card-tags">Sprout Social</div>
-            </div>
-        </div>
-
-        <!-- 11. New Card -->
-        <div class="card">
-            <img src="https://i.postimg.cc/bNqFw41r/Meet-the-team-posts-x1.png" alt="Product Launch">
-            <div class="card-info">
-                <div class="card-title">Content Designs</div>
-                <div class="card-tags">Content Creation</div>
-            </div>
-        </div>
-
-        <!-- 12. New Card -->
-        <div class="card">
-            <img src="https://i.postimg.cc/pLWf8HdR/Untitled-(22).png" alt="Social Media Promotion ">
-            <div class="card-info">
-                <div class="card-title">Social Media Promotion</div>
-                <div class="card-tags">Google Reviews</div>
+                <div class="card-title">Marketing Banner</div>
+                <div class="card-tags">Canva Pro</div>
             </div>
         </div>
 
