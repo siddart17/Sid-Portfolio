@@ -21,10 +21,17 @@
                     colors: {
                         brand: {
                             purple: '#6A34E3', 
-                            black: '#111111',
-                            gray: '#F3F4F6',
-                            text: '#1F2937'
+                            purpleLight: '#8B5CF6',
+                            black: '#0A0A0A', // Deepened black for richer contrast
+                            gray: '#F8F9FA', // Lighter, more modern gray
+                            text: '#1F2937',
+                            surface: 'rgba(255, 255, 255, 0.7)' // For glassmorphism
                         }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+                        'glow': '0 0 20px rgba(106, 52, 227, 0.3)',
+                        'hover': '0 20px 40px -10px rgba(106, 52, 227, 0.15)',
                     }
                 }
             }
@@ -32,45 +39,58 @@
     </script>
 
     <style>
+        :root {
+            --bg-color: #FAFAFC;
+        }
+
         body {
             font-family: 'Manrope', sans-serif;
             color: #111111;
-            background-color: #ffffff;
+            background-color: var(--bg-color);
+            overflow-x: hidden; /* Prevent horizontal scroll from decorative blobs */
         }
 
-        /* Major Players style links - Underline on hover */
+        /* Modernized background noise/texture */
+        .bg-pattern {
+            background-image: radial-gradient(rgba(106, 52, 227, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* Major Players style links - Modernized hover */
         .nav-link {
             position: relative;
             text-decoration: none;
             color: #111;
             font-weight: 600;
             transition: color 0.3s ease;
+            padding: 0.5rem 0;
         }
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -4px;
+            bottom: 0;
             left: 0;
-            background-color: #6A34E3;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #6A34E3, #8B5CF6);
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 2px;
         }
         .nav-link:hover::after {
             width: 100%;
         }
 
-        /* Large Statement Text */
+        /* Large Statement Text - Tighter tracking for modern editorial look */
         .hero-text {
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
         }
 
-        /* Hero Animation - Clip Path Reveal */
+        /* Hero Animation - Smooth Reveal */
         @keyframes heroReveal {
             0% {
                 clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-                transform: translateY(100%);
+                transform: translateY(40px);
                 opacity: 0;
             }
             100% {
@@ -81,9 +101,9 @@
         }
 
         .hero-animate {
-            opacity: 0; /* Start hidden */
-            animation: heroReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-            will-change: transform, clip-path;
+            opacity: 0;
+            animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, clip-path, opacity;
         }
 
         .delay-100 { animation-delay: 0.1s; }
@@ -92,79 +112,86 @@
         .delay-400 { animation-delay: 0.5s; }
         .delay-500 { animation-delay: 0.7s; }
 
-        /* Button Styles */
+        /* Button Styles - Modernized with gradients and softer shadows */
         .btn-primary {
-            background-color: #111;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
             color: #fff;
-            padding: 12px 32px;
+            padding: 14px 36px;
             border-radius: 9999px;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-flex;
             align-items: center;
-            justify-content: center; /* Centered for mobile */
-            gap: 8px;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .btn-primary:hover {
-            background-color: #6A34E3;
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #6A34E3 0%, #8B5CF6 100%);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--tw-shadow-hover);
         }
 
-        .btn-outline {
-            background-color: transparent;
-            color: #111;
-            border: 2px solid #111;
-            padding: 12px 32px;
-            border-radius: 9999px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center; /* Centered for mobile */
-        }
-        .btn-outline:hover {
-            background-color: #111;
-            color: #fff;
+        /* Ambient Background Blobs for modern aesthetic */
+        .ambient-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out alternate;
         }
 
-        /* Card Hover Effect */
-        .service-card {
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
-        }
-        .service-card:hover {
-            border-color: #111;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
         }
 
-        /* Removed Image Hover Animations */
-        .work-img-container {
-            overflow: hidden;
-        }
-        /* Images are now static */
-        .work-img {
-            display: block;
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         /* Reveal Animation */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Custom selection color */
+        ::selection {
+            background-color: #6A34E3;
+            color: white;
+        }
+        
+        /* Smooth image transitions */
+        .img-zoom {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .group:hover .img-zoom {
+            transform: scale(1.05);
+        }
     </style>
 </head>
-<body class="selection:bg-brand-purple selection:text-white">
+<body class="bg-pattern text-brand-black antialiased">
+
+    <!-- Ambient background glows -->
+    <div class="ambient-blob bg-brand-purple w-96 h-96 top-0 right-0 md:-top-20 md:-right-20"></div>
+    <div class="ambient-blob bg-blue-300 w-80 h-80 top-40 left-0 md:-left-20 opacity-30"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <nav class="fixed w-full z-50 top-0 bg-white/70 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold tracking-tighter">
+            <a href="#" class="text-2xl font-extrabold tracking-tighter hover:opacity-80 transition-opacity">
                 Sidharth<span class="text-brand-purple">.</span>
             </a>
 
@@ -175,12 +202,12 @@
                 <a href="#references" class="nav-link">References</a>
             </div>
 
-            <a href="tel:+447741519675" class="hidden md:inline-flex btn-primary text-sm">
+            <a href="tel:+447741519675" class="hidden md:inline-flex btn-primary text-sm shadow-sm hover:shadow-glow">
                 Get in Touch
             </a>
 
             <!-- Mobile Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-black" aria-label="Toggle mobile menu">
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-black hover:text-brand-purple transition-colors" aria-label="Toggle mobile menu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
@@ -188,34 +215,36 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-20 shadow-xl">
-            <div class="flex flex-col p-6 space-y-6">
-                <a href="#about" class="mobile-link text-xl font-bold text-gray-800">About</a>
-                <a href="#portfolio" class="mobile-link text-xl font-bold text-gray-800"> HE Portfolio</a>
-                <a href="#references" class="mobile-link text-xl font-bold text-gray-800">References</a>
-                <a href="tel:+447741519675" class="mobile-link btn-primary justify-center w-full">Get in Touch</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-3xl border-t border-gray-100 absolute w-full left-0 top-20 shadow-2xl transition-all">
+            <div class="flex flex-col p-8 space-y-6">
+                <a href="#about" class="mobile-link text-2xl font-extrabold text-gray-900 hover:text-brand-purple transition-colors">About</a>
+                <a href="#portfolio" class="mobile-link text-2xl font-extrabold text-gray-900 hover:text-brand-purple transition-colors"> HE Portfolio</a>
+                <a href="#references" class="mobile-link text-2xl font-extrabold text-gray-900 hover:text-brand-purple transition-colors">References</a>
+                <div class="pt-4 mt-4 border-t border-gray-100">
+                    <a href="tel:+447741519675" class="mobile-link btn-primary justify-center w-full">Get in Touch</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-16 md:pt-40 md:pb-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-12 gap-10 md:gap-12 items-end">
-            <div class="md:col-span-8">
-                <!-- Optimized text size for mobile -->
-                <h1 class="hero-text text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-black mb-6 md:mb-8">
+    <section class="pt-40 pb-20 md:pt-48 md:pb-32 px-6 max-w-7xl mx-auto relative z-10">
+        <div class="grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+            <div class="md:col-span-8 relative">
+                <!-- Optimized text size for mobile, added modern text gradient -->
+                <h1 class="hero-text text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold text-brand-black mb-6 md:mb-8">
                     <span class="block hero-animate">Hi there,</span>
-                    <span class="block hero-animate delay-200 text-brand-purple">I'm Sidharth.</span>
+                    <span class="block hero-animate delay-200 bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-purpleLight pb-2">I'm Sidharth.</span>
                 </h1>
                 <div class="hero-animate delay-300">
-                    <p class="text-lg md:text-2xl text-gray-600 font-medium max-w-2xl leading-relaxed mb-8 md:mb-10">
+                    <p class="text-lg md:text-2xl text-gray-600 font-medium max-w-2xl leading-relaxed mb-10 md:mb-12">
                     Experienced professional in Communications & Marketing.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#portfolio" class="btn-primary w-full sm:w-auto">
+                        <a href="#portfolio" class="btn-primary w-full sm:w-auto text-base">
                             See My Work
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                             </svg>
                         </a>
                     </div>
@@ -224,24 +253,27 @@
             
             <!-- Stats -->
             <div class="md:col-span-4 hero-animate delay-500">
-                <div class="grid grid-cols-2 md:grid-cols-1 gap-6 md:gap-8 border-t border-gray-200 pt-8 md:pt-0 md:border-t-0 md:border-l md:pl-12">
-                    <div>
-                        <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-1">
+                <div class="grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-10 glass-card p-8 rounded-3xl border border-white shadow-soft relative overflow-hidden">
+                    <!-- Subtle background accent in stats card -->
+                    <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-purple rounded-full filter blur-[50px] opacity-20"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-black mb-2 tracking-tight">
                             3+ Years
                         </div>
-                        <div class="text-xs md:text-sm font-bold text-gray-400 uppercase tracking-widest">Digital Media & Comms Experience</div>
+                        <div class="text-xs md:text-sm font-bold text-gray-500 uppercase tracking-widest">Digital Media & Comms Experience</div>
                     </div>
-                    <div>
-                        <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-1">
+                    <div class="relative z-10">
+                        <div class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-black mb-2 tracking-tight">
                             Award-Winning
                         </div>
-                        <div class="text-xs md:text-sm font-bold text-gray-400 uppercase tracking-widest">Student-Staff Partnership</div>
+                        <div class="text-xs md:text-sm font-bold text-gray-500 uppercase tracking-widest">Student-Staff Partnership</div>
                     </div>
-                    <div>
-                        <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-1">
+                    <div class="relative z-10 col-span-2 md:col-span-1">
+                        <div class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-black mb-2 tracking-tight">
                             Multi-Channel
                         </div>
-                        <div class="text-xs md:text-sm font-bold text-gray-400 uppercase tracking-widest">Campaigns & Events</div>
+                        <div class="text-xs md:text-sm font-bold text-gray-500 uppercase tracking-widest">Campaigns & Events</div>
                     </div>
                 </div>
             </div>
@@ -249,15 +281,18 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 md:py-24 bg-brand-gray">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section id="about" class="py-20 md:py-32 relative">
+        <div class="absolute inset-0 bg-white/60 backdrop-blur-md border-y border-gray-100 z-0"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div class="reveal">
-                    <span class="text-brand-purple font-bold uppercase tracking-widest text-sm mb-4 block">Who I Am</span>
-                    <h2 class="text-xl md:text-2xl font-extrabold text-black mb-6 md:mb-8 leading-tight">
-                        A digital communications and marketing specialist dedicated to enhancing  <br> the student experience and amplifying academic impact.
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 text-brand-purple font-bold uppercase tracking-widest text-xs mb-6">
+                        <span class="w-2 h-2 rounded-full bg-brand-purple"></span> Who I Am
+                    </div>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-brand-black mb-8 leading-tight tracking-tight">
+                        A digital communications and marketing specialist dedicated to enhancing  <br class="hidden lg:block"> the student experience and amplifying academic impact.
                     </h2>
-                    <div class="space-y-4 text-sm md:text-base text-gray-600 leading-relaxed font-medium">
+                    <div class="space-y-6 text-base md:text-lg text-gray-600 leading-relaxed font-medium">
                         <p>
                             My journey into higher education communications and marketing started my Master’s in Digital Media at the University of Leeds. Since then, I have dedicated my career to enhancing the university experience for both students and staff.
                         </p>
@@ -268,17 +303,26 @@
                         <p>
                             My approach relies on data-driven design, analytics, and accessible content creation. In practice, this methodology has allowed me to drive strong results, such as scaling student newsletter open rates to 86%, lifting partnership award nominations by 114%, and supporting campaigns that raised nearly £1 million for student support.
                         </p>
-                        <p class="text-xs md:text-sm text-gray-500 pt-2 border-t border-gray-200">
-                            My commitment to inclusive communication and positive change was recognised with the University of Leeds Student-Staff Partnership of the Year award.
-                        </p>     
+                        <div class="p-6 bg-brand-purple/5 border border-brand-purple/10 rounded-2xl mt-8">
+                            <p class="text-sm md:text-base text-gray-800 font-semibold flex items-start gap-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-brand-purple shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                                My commitment to inclusive communication and positive change was recognised with the University of Leeds Student-Staff Partnership of the Year award.
+                            </p>     
+                        </div>
                     </div>
                 </div>
-                <div class="relative reveal flex justify-center">
-                    <!-- Adjusted width: 80% on mobile, 60% on desktop -->
-                    <div class="w-4/5 md:w-3/5 relative">
-                        <!-- Removed grayscale and transition effects -->
-                        <img src="https://i.postimg.cc/RZQzFxrv/Whats-App-Image-2024-04-30-at-17-37-46-e1ef24de.jpg" alt="Sidharth" class="w-full h-auto rounded shadow-2xl relative z-10">
-                        <div class="absolute -bottom-6 -left-6 w-16 h-16 md:w-20 md:h-20 bg-brand-purple z-0"></div>
+                <div class="relative reveal flex justify-center md:justify-end mt-10 md:mt-0">
+                    <!-- Adjusted width: 85% on mobile, 75% on desktop -->
+                    <div class="w-11/12 md:w-4/5 relative group">
+                        <!-- Decorative modern elements behind image -->
+                        <div class="absolute -top-6 -right-6 w-32 h-32 border-2 border-brand-purple/30 rounded-3xl -z-10 group-hover:rotate-6 transition-transform duration-700"></div>
+                        <div class="absolute -bottom-8 -left-8 w-40 h-40 bg-brand-purple rounded-3xl -z-10 opacity-20 filter blur-xl group-hover:opacity-40 transition-opacity duration-700"></div>
+                        
+                        <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/50 relative z-10 bg-white">
+                            <img src="https://i.postimg.cc/RZQzFxrv/Whats-App-Image-2024-04-30-at-17-37-46-e1ef24de.jpg" alt="Sidharth" class="w-full h-auto img-zoom object-cover">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -286,26 +330,30 @@
     </section>
 
     <!-- HE Portfolio (Grid Layout) -->
-    <section id="portfolio" class="py-16 md:py-24 px-6 max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-black mb-10 md:mb-16 text-center"> HE Portfolio </h2>
+    <section id="portfolio" class="py-20 md:py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16 md:mb-24 reveal">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-black tracking-tight"> HE Portfolio </h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-brand-purple to-brand-purpleLight mx-auto mt-6 rounded-full"></div>
+        </div>
         
         <!-- Featured Horizontal Case Studies -->
-        <div class="flex flex-col gap-10 mb-20">
+        <div class="flex flex-col gap-12 mb-24">
             <!-- Featured Case Study 1 -->
-            <a href="https://drive.google.com/file/d/1qeH1ONL5jzHwgzmpAeSATxCDo7By1lyX/view?usp=sharing" class="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden reveal">
-                <div class="grid md:grid-cols-2 h-full">
-                    <div class="relative h-64 md:h-auto overflow-hidden">
-                        <img src="https://i.postimg.cc/8c4MG8xm/Books.jpg" alt="Student Campaign" class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+            <a href="https://drive.google.com/file/d/1qeH1ONL5jzHwgzmpAeSATxCDo7By1lyX/view?usp=sharing" class="group block glass-card rounded-[2rem] shadow-soft hover:shadow-hover transition-all duration-500 overflow-hidden reveal">
+                <div class="grid md:grid-cols-5 h-full">
+                    <div class="relative h-72 md:h-auto overflow-hidden md:col-span-3">
+                        <img src="https://i.postimg.cc/8c4MG8xm/Books.jpg" alt="Student Campaign" class="absolute inset-0 w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                     </div>
-                    <div class="p-8 md:p-12 flex flex-col justify-center">
-                        <span class="text-brand-purple font-bold uppercase tracking-widest text-xs mb-3 block">Featured Case Study</span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-black mb-4 group-hover:text-brand-purple transition-colors">The SEE Bulletin </h3>
-                        <p class="text-gray-600 mb-8 leading-relaxed text-sm md:text-base">Streamlining Student Communications & Driving Engagement at the University 
+                    <div class="p-8 md:p-14 flex flex-col justify-center md:col-span-2 bg-white/80">
+                        <span class="inline-block px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-bold uppercase tracking-widest text-[0.65rem] mb-4 w-max">Featured Case Study</span>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-brand-black mb-4 group-hover:text-brand-purple transition-colors leading-tight">The SEE Bulletin </h3>
+                        <p class="text-gray-600 mb-10 leading-relaxed text-base font-medium">Streamlining Student Communications & Driving Engagement at the University 
 of Leeds. </p>
                         <div class="mt-auto">
-                            <span class="inline-flex items-center font-bold text-black group-hover:text-brand-purple transition-colors">
+                            <span class="inline-flex items-center font-bold text-brand-black group-hover:text-brand-purple transition-colors text-lg">
                                 Read Full Case Study
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 transform group-hover:translate-x-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                             </span>
                         </div>
                     </div>
@@ -313,20 +361,21 @@ of Leeds. </p>
             </a>
 
             <!-- Featured Case Study 2 -->
-            <a href="https://drive.google.com/file/d/1Ngn0qxGguNRFpTBSDVe4pYjoyFokED3B/view?usp=sharing" class="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden reveal">
-                <div class="grid md:grid-cols-2 h-full">
+            <a href="https://drive.google.com/file/d/1Ngn0qxGguNRFpTBSDVe4pYjoyFokED3B/view?usp=sharing" class="group block glass-card rounded-[2rem] shadow-soft hover:shadow-hover transition-all duration-500 overflow-hidden reveal">
+                <div class="grid md:grid-cols-5 h-full">
                     <!-- Image on right for desktop (order-1 on mobile, order-2 on desktop) -->
-                    <div class="relative h-64 md:h-auto overflow-hidden md:order-2">
-                        <img src="https://i.postimg.cc/7Lr6KsWr/jasmine-hennessy-ᡣ𐭩.jpg" alt="Alumni Fundraising" class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                    <div class="relative h-72 md:h-auto overflow-hidden md:col-span-3 md:order-2">
+                        <img src="https://i.postimg.cc/7Lr6KsWr/jasmine-hennessy-ᡣ𐭩.jpg" alt="Alumni Fundraising" class="absolute inset-0 w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                     </div>
-                    <div class="p-8 md:p-12 flex flex-col justify-center md:order-1">
-                        <span class="text-brand-purple font-bold uppercase tracking-widest text-xs mb-3 block">Featured Case Study</span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-black mb-4 group-hover:text-brand-purple transition-colors">Horizons Institute </h3>
-                        <p class="text-gray-600 mb-8 leading-relaxed text-sm md:text-base">Amplifying Academic Impact & Making Complex Research Accessible</p>
+                    <div class="p-8 md:p-14 flex flex-col justify-center md:col-span-2 md:order-1 bg-white/80">
+                        <span class="inline-block px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-bold uppercase tracking-widest text-[0.65rem] mb-4 w-max">Featured Case Study</span>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-brand-black mb-4 group-hover:text-brand-purple transition-colors leading-tight">Horizons Institute </h3>
+                        <p class="text-gray-600 mb-10 leading-relaxed text-base font-medium">Amplifying Academic Impact & Making Complex Research Accessible</p>
                         <div class="mt-auto">
-                            <span class="inline-flex items-center font-bold text-black group-hover:text-brand-purple transition-colors">
+                            <span class="inline-flex items-center font-bold text-brand-black group-hover:text-brand-purple transition-colors text-lg">
                                 Read Full Case Study
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 transform group-hover:translate-x-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                             </span>
                         </div>
                     </div>
@@ -334,20 +383,21 @@ of Leeds. </p>
             </a>
 
             <!-- Featured Case Study 3 -->
-            <a href="https://drive.google.com/file/d/1x2mqCdFg8QYsGOdx8gbHA63osER6CEnC/view?usp=sharing" class="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden reveal">
-                <div class="grid md:grid-cols-2 h-full">
-                    <div class="relative h-64 md:h-auto overflow-hidden">
-                        <img src="https://i.postimg.cc/MHpXynrD/Surviving-Digital-Overload-Dadaism.jpg" alt="Staff Partnership" class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+            <a href="https://drive.google.com/file/d/1x2mqCdFg8QYsGOdx8gbHA63osER6CEnC/view?usp=sharing" class="group block glass-card rounded-[2rem] shadow-soft hover:shadow-hover transition-all duration-500 overflow-hidden reveal">
+                <div class="grid md:grid-cols-5 h-full">
+                    <div class="relative h-72 md:h-auto overflow-hidden md:col-span-3">
+                        <img src="https://i.postimg.cc/MHpXynrD/Surviving-Digital-Overload-Dadaism.jpg" alt="Staff Partnership" class="absolute inset-0 w-full h-full object-cover img-zoom">
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500"></div>
                     </div>
-                    <div class="p-8 md:p-12 flex flex-col justify-center">
-                        <span class="text-brand-purple font-bold uppercase tracking-widest text-xs mb-3 block">Featured Case Study</span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-black mb-4 group-hover:text-brand-purple transition-colors">The Big Decolonisation 
+                    <div class="p-8 md:p-14 flex flex-col justify-center md:col-span-2 bg-white/80">
+                        <span class="inline-block px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-bold uppercase tracking-widest text-[0.65rem] mb-4 w-max">Featured Case Study</span>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-brand-black mb-4 group-hover:text-brand-purple transition-colors leading-tight">The Big Decolonisation 
 Dialogue</h3>
-                        <p class="text-gray-600 mb-8 leading-relaxed text-sm md:text-base">Driving Digital Engagement & Building Inclusive Communities.</p>
+                        <p class="text-gray-600 mb-10 leading-relaxed text-base font-medium">Driving Digital Engagement & Building Inclusive Communities.</p>
                         <div class="mt-auto">
-                            <span class="inline-flex items-center font-bold text-black group-hover:text-brand-purple transition-colors">
+                            <span class="inline-flex items-center font-bold text-brand-black group-hover:text-brand-purple transition-colors text-lg">
                                 Read Full Case Study
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 transform group-hover:translate-x-3 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                             </span>
                         </div>
                     </div>
@@ -357,145 +407,133 @@ Dialogue</h3>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Project 1 -->
-            <a href="analytics.html" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/4Nn0NBqb/NESTLO-(9).png" alt="Performance Marketing" class="w-full h-64 object-cover object-top transform transition-transform duration-500 group-hover:scale-105">
+            <a href="analytics.html" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/4Nn0NBqb/NESTLO-(9).png" alt="Performance Marketing" class="w-full h-60 object-cover object-top img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Analytics & Data</h3>
-                        <p class="text-sm text-gray-500">Google Ads Analysis</p>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors">Analytics & Data</h3>
+                        <p class="text-sm font-medium text-gray-500">Google Ads Analysis</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-brand-purple group-hover:border-brand-purple transition-all duration-300 shrink-0 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                 </div>
             </a>
 
             <!-- Project 2 -->
-            <a href="socialmediaworks.html" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/28vXTmsY/Behind-The-Scenes-of-Our-Latest-Music-Video.jpg" alt="Social Media Designs" class="w-full h-64 object-cover object-top transform transition-transform duration-500 group-hover:scale-105">
+            <a href="socialmediaworks.html" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-100">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/28vXTmsY/Behind-The-Scenes-of-Our-Latest-Music-Video.jpg" alt="Social Media Designs" class="w-full h-60 object-cover object-top img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Social Media Designs</h3>
-                        <p class="text-sm text-gray-500">Visual Identity</p>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors">Social Media Designs</h3>
+                        <p class="text-sm font-medium text-gray-500">Visual Identity</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-brand-purple group-hover:border-brand-purple transition-all duration-300 shrink-0 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                 </div>
             </a>
 
             <!-- Project 3 -->
-            <a href="Webdevelopment.html" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/Bv13BRBK/Strong-Hold-Web-design-Development-by-Rattlesnake-Group.jpg" alt="Web Development" class="w-full h-64 object-cover object-top transform transition-transform duration-500 group-hover:scale-105">
+            <a href="Webdevelopment.html" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-200">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/Bv13BRBK/Strong-Hold-Web-design-Development-by-Rattlesnake-Group.jpg" alt="Web Development" class="w-full h-60 object-cover object-top img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Web Development</h3>
-                        <p class="text-sm text-gray-500">Design & Development</p>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors">Web Development</h3>
+                        <p class="text-sm font-medium text-gray-500">Design & Development</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-brand-purple group-hover:border-brand-purple transition-all duration-300 shrink-0 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                 </div>
             </a>
 
             <!-- Project 4 -->
-            <a href="eventcoverage.html" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/WpMhV0fJ/Ad-L-event-(13-of-26).jpg" alt="Event Photography" class="w-full h-64 object-cover object-top transform transition-transform duration-500 group-hover:scale-105">
+            <a href="eventcoverage.html" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/WpMhV0fJ/Ad-L-event-(13-of-26).jpg" alt="Event Photography" class="w-full h-60 object-cover object-top img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Event Photography</h3>
-                        <p class="text-sm text-gray-500">University of Leeds Coverage</p>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors">Event Photography</h3>
+                        <p class="text-sm font-medium text-gray-500">University of Leeds Coverage</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-brand-purple group-hover:border-brand-purple transition-all duration-300 shrink-0 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                 </div>
             </a>
 
             <!-- Project 5 -->
-            <a href="https://medium.com/horizons-institute/unlocking-the-power-of-data-science-to-improve-wellbeing-in-later-life-d1707c520d1c" target="_blank" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/L8G6qQDQ/1-THp-VQz-ZX0Rc-V1SRCn-Mi-Kw.webp" alt="Blog: Unlocking the power of data science to improve wellbeing in later life" class="w-full h-64 object-cover object-top transform transition-transform duration-500 group-hover:scale-105">
+            <a href="https://medium.com/horizons-institute/unlocking-the-power-of-data-science-to-improve-wellbeing-in-later-life-d1707c520d1c" target="_blank" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-100">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/L8G6qQDQ/1-THp-VQz-ZX0Rc-V1SRCn-Mi-Kw.webp" alt="Blog: Unlocking the power of data science to improve wellbeing in later life" class="w-full h-60 object-cover object-top img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Blog: Unlocking the power of data science to improve wellbeing in later life</h3>
-                        <p class="text-sm text-gray-500 group-hover:text-brand-purple transition-colors">Read on Medium &nearr;</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                        <h3 class="text-[1.1rem] font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors leading-snug">Blog: Unlocking the power of data science to improve wellbeing in later life</h3>
+                        <p class="text-sm font-medium text-brand-purple mt-2">Read on Medium &nearr;</p>
                     </div>
                 </div>
             </a>
 
             <!-- Additional Blog 1 -->
-            <a href="https://medium.com/horizons-institute/discovering-curiosity-and-commonalities-in-methods-adedce254c73" target="_blank" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/QtstzXtc/Screenshot-2026-08-15-142347.png" alt="Blog Post 2" class="w-full h-64 object-cover object-center transform transition-transform duration-500 group-hover:scale-105">
+            <a href="https://medium.com/horizons-institute/discovering-curiosity-and-commonalities-in-methods-adedce254c73" target="_blank" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-200">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/QtstzXtc/Screenshot-2026-08-15-142347.png" alt="Blog Post 2" class="w-full h-60 object-cover object-center img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Discovering curiosity and commonalities in methods</h3>
-                        <p class="text-sm text-gray-500 group-hover:text-brand-purple transition-colors">Read on Medium &nearr;</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors leading-snug">Discovering curiosity and commonalities in methods</h3>
+                        <p class="text-sm font-medium text-brand-purple mt-2">Read on Medium &nearr;</p>
                     </div>
                 </div>
             </a>
 
             <!-- Additional Blog 2 -->
-            <a href="https://medium.com/horizons-institute/creating-a-platform-for-interdisciplinary-and-global-collaboration-f070bcb5a831" target="_blank" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/3NXzcTds/Screenshot-2026-08-15-142819.png" alt="Blog Post 3" class="w-full h-64 object-cover object-center transform transition-transform duration-500 group-hover:scale-105">
+            <a href="https://medium.com/horizons-institute/creating-a-platform-for-interdisciplinary-and-global-collaboration-f070bcb5a831" target="_blank" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/3NXzcTds/Screenshot-2026-08-15-142819.png" alt="Blog Post 3" class="w-full h-60 object-cover object-center img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors"> Creating a Platform for interdisciplinary and global collaboration</h3>
-                        <p class="text-sm text-gray-500 group-hover:text-brand-purple transition-colors">Read on Medium &nearr;</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors leading-snug"> Creating a Platform for interdisciplinary and global collaboration</h3>
+                        <p class="text-sm font-medium text-brand-purple mt-2">Read on Medium &nearr;</p>
                     </div>
                 </div>
             </a>
 
             <!-- Additional Blog 3 -->
-            <a href="https://medium.com/horizons-institute/unlocking-the-power-of-local-knowledge-expertise-and-collaboration-for-sustainable-cooling-in-88bf1fe9513d" target="_blank" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/k5N8GYRQ/Screenshot-2026-08-15-143119.png" alt="Blog Post 4" class="w-full h-64 object-cover object-center transform transition-transform duration-500 group-hover:scale-105">
+            <a href="https://medium.com/horizons-institute/unlocking-the-power-of-local-knowledge-expertise-and-collaboration-for-sustainable-cooling-in-88bf1fe9513d" target="_blank" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-100">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/k5N8GYRQ/Screenshot-2026-08-15-143119.png" alt="Blog Post 4" class="w-full h-60 object-cover object-center img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Unlocking the power of local knowledge, expertise, and collaboration for sustainable cooling in cities</h3>
-                        <p class="text-sm text-gray-500 group-hover:text-brand-purple transition-colors">Read on Medium &nearr;</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                        <h3 class="text-[1.1rem] font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors leading-snug">Unlocking the power of local knowledge, expertise, and collaboration for sustainable cooling in cities</h3>
+                        <p class="text-sm font-medium text-brand-purple mt-2">Read on Medium &nearr;</p>
                     </div>
                 </div>
             </a>
 
             <!-- Project 7 -->
-            <a href="pressreleases.html" class="group cursor-pointer block">
-                <div class="rounded-2xl overflow-hidden mb-4 border border-gray-100 shadow-sm relative">
-                    <img src="https://i.postimg.cc/XqyqBCVy/Do-Current-Affairs-Of-Pakistan-Influence-The-International-Relations.jpg" alt="Press Releases" class="w-full h-64 object-cover object-center transform transition-transform duration-500 group-hover:scale-105">
+            <a href="pressreleases.html" class="group cursor-pointer block glass-card rounded-3xl p-3 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-2 reveal delay-200">
+                <div class="rounded-2xl overflow-hidden mb-5 relative">
+                    <img src="https://i.postimg.cc/XqyqBCVy/Do-Current-Affairs-Of-Pakistan-Influence-The-International-Relations.jpg" alt="Press Releases" class="w-full h-60 object-cover object-center img-zoom">
                 </div>
-                <div class="flex justify-between items-start">
+                <div class="px-4 pb-4 flex justify-between items-start">
                     <div>
-                        <h3 class="text-lg font-bold text-black mb-1 group-hover:text-brand-purple transition-colors">Press Releases</h3>
-                        <p class="text-sm text-gray-500">Public Relations & Media</p>
+                        <h3 class="text-xl font-extrabold text-brand-black mb-1 group-hover:text-brand-purple transition-colors">Press Releases</h3>
+                        <p class="text-sm font-medium text-gray-500">Public Relations & Media</p>
                     </div>
-                    <div class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-black group-hover:border-black transition-all">
-                        <span class="text-lg text-gray-400 group-hover:text-white pb-1">&rarr;</span>
+                    <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-brand-purple group-hover:border-brand-purple transition-all duration-300 shrink-0 shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                 </div>
             </a>
@@ -503,117 +541,122 @@ Dialogue</h3>
     </section>
 
     <!-- LinkedIn Posts Section -->
-    <section id="linkedin-posts" class="py-16 md:py-24 bg-brand-gray px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-10 md:mb-16 reveal">
-                <span class="text-brand-purple font-bold uppercase tracking-widest text-sm mb-2 block">Insights</span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-black mb-6">Latest on LinkedIn</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">
+    <section id="linkedin-posts" class="py-20 md:py-32 relative">
+        <div class="absolute inset-0 bg-white/60 backdrop-blur-md border-y border-gray-100 z-0"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 md:mb-20 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 text-brand-purple font-bold uppercase tracking-widest text-xs mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-purple"></span> Insights
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-brand-black mb-6 tracking-tight">Latest on LinkedIn</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg font-medium">
                     Sharing thoughts on digital marketing strategies, agency growth, and industry trends.
                 </p>
             </div>
 
-            <!-- Changed to a 2-column grid to perfectly balance 4 posts -->
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-10">
                 <!-- Post 1 (New) -->
-                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_see-asst-work-highlights-ugcPost-7438007206182219776-4MI6?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col h-full reveal">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-10 h-10 rounded-full object-cover">
+                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_see-asst-work-highlights-ugcPost-7438007206182219776-4MI6?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-hover hover:-translate-y-2 transition-all duration-500 border border-gray-100/80 flex flex-col h-full reveal relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0a66c2] to-[#004182] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                         <div>
-                            <div class="font-bold text-sm text-black leading-tight">Sidharth Thombrakudiyil</div>
-                            <div class="text-xs text-gray-500">Recently • <i class="fas fa-globe-americas"></i></div>
+                            <div class="font-extrabold text-base text-brand-black leading-tight">Sidharth Thombrakudiyil</div>
+                            <div class="text-xs text-gray-500 font-medium mt-0.5">Recently • <i class="fas fa-globe-americas"></i></div>
                         </div>
-                        <div class="ml-auto text-brand-purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <div class="ml-auto text-[#0a66c2] bg-[#0a66c2]/10 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p class="text-gray-700 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
                         See Asst. Work Highlights! Very excited to share my latest projects and milestones. Check out the full breakdown in the link below.
                     </p>
-                    <div class="rounded-xl overflow-hidden mt-auto border border-gray-100">
-                         <!-- Placeholder image: Update the src below -->
-                         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Work Highlights" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="rounded-2xl overflow-hidden mt-auto border border-gray-100">
+                         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Work Highlights" class="w-full h-56 object-cover img-zoom">
                     </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400 font-medium">
-                        <span>New Post</span>
-                        <span>Click to view &nearr;</span>
+                    <div class="mt-6 pt-5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-bold">
+                        <span class="bg-[#0a66c2]/10 text-[#0a66c2] px-3 py-1 rounded-full">New Post</span>
+                        <span class="group-hover:text-[#0a66c2] transition-colors">Click to view &nearr;</span>
                     </div>
                 </a>
 
                 <!-- Post 2 -->
-                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_podcast-storytelling-digitalmedia-activity-7362396592487731200-X8gG?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col h-full reveal delay-100">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-10 h-10 rounded-full object-cover">
+                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_podcast-storytelling-digitalmedia-activity-7362396592487731200-X8gG?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-hover hover:-translate-y-2 transition-all duration-500 border border-gray-100/80 flex flex-col h-full reveal delay-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0a66c2] to-[#004182] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                         <div>
-                            <div class="font-bold text-sm text-black leading-tight">Sidharth Thombrakudiyil</div>
-                            <div class="text-xs text-gray-500">2d • <i class="fas fa-globe-americas"></i></div>
+                            <div class="font-extrabold text-base text-brand-black leading-tight">Sidharth Thombrakudiyil</div>
+                            <div class="text-xs text-gray-500 font-medium mt-0.5">2d • <i class="fas fa-globe-americas"></i></div>
                         </div>
-                        <div class="ml-auto text-brand-purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        <div class="ml-auto text-[#0a66c2] bg-[#0a66c2]/10 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p class="text-gray-700 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
                         I recently collaborated with Dan Waters on a recent podcast shoot for Sherif Youssef, and it was truly a rewarding experience. From setting up the equipment to collaborating as a team, the entire process gave me deeper insights into content creation and storytelling through podcasting....
                     </p>
-                    <div class="rounded-xl overflow-hidden mt-auto border border-gray-100">
-                         <img src="https://i.postimg.cc/nLT60JFb/Screenshot-2025-12-16-061955.png" alt="Data Chart" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="rounded-2xl overflow-hidden mt-auto border border-gray-100">
+                         <img src="https://i.postimg.cc/nLT60JFb/Screenshot-2025-12-16-061955.png" alt="Data Chart" class="w-full h-56 object-cover img-zoom">
                     </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400 font-medium">
-                        <span>124 likes</span>
-                        <span>18 comments</span>
+                    <div class="mt-6 pt-5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-bold">
+                        <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-[10px]">👍</span> 124 likes</span>
+                        <span class="hover:text-[#0a66c2] transition-colors">18 comments</span>
                     </div>
                 </a>
 
                 <!-- Post 3 -->
-                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_masters-in-digital-media-thank-you-university-activity-7353764680705662976-9uRA?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col h-full reveal delay-200">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-10 h-10 rounded-full object-cover">
+                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_masters-in-digital-media-thank-you-university-activity-7353764680705662976-9uRA?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-hover hover:-translate-y-2 transition-all duration-500 border border-gray-100/80 flex flex-col h-full reveal delay-200 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0a66c2] to-[#004182] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                          <div>
-                            <div class="font-bold text-sm text-black leading-tight">Sidharth Thombrakudiyil</div>
-                            <div class="text-xs text-gray-500">4d • <i class="fas fa-globe-americas"></i></div>
+                            <div class="font-extrabold text-base text-brand-black leading-tight">Sidharth Thombrakudiyil</div>
+                            <div class="text-xs text-gray-500 font-medium mt-0.5">4d • <i class="fas fa-globe-americas"></i></div>
                         </div>
-                         <div class="ml-auto text-brand-purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                         <div class="ml-auto text-[#0a66c2] bg-[#0a66c2]/10 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p class="text-gray-700 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
                         Masters in Digital Media 🎓Thank you University of Leeds, you’re the best!
                     </p>
-                    <div class="rounded-xl overflow-hidden mt-auto border border-gray-100">
-                         <img src="https://i.postimg.cc/BbfkvQNz/Screenshot-2025-12-16-062320.png" alt="Team meeting" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="rounded-2xl overflow-hidden mt-auto border border-gray-100">
+                         <img src="https://i.postimg.cc/BbfkvQNz/Screenshot-2025-12-16-062320.png" alt="Team meeting" class="w-full h-56 object-cover img-zoom">
                     </div>
-                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400 font-medium">
-                        <span>89 likes</span>
-                        <span>12 comments</span>
+                     <div class="mt-6 pt-5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-bold">
+                        <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-[10px]">👍</span> 89 likes</span>
+                        <span class="hover:text-[#0a66c2] transition-colors">12 comments</span>
                     </div>
                 </a>
 
                 <!-- Post 4 -->
-                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_greetings-everyone-im-immensely-proud-activity-7191114095771754496-CgEl?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 flex flex-col h-full reveal delay-300">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-10 h-10 rounded-full object-cover">
+                <a href="https://www.linkedin.com/posts/sidharththombrakudiyil_greetings-everyone-im-immensely-proud-activity-7191114095771754496-CgEl?utm_source=share&utm_medium=member_desktop&rcm=ACoAADg_-0QBenHDViT9R3yhDUCN53uCRwNXRO4" target="_blank" class="group bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-hover hover:-translate-y-2 transition-all duration-500 border border-gray-100/80 flex flex-col h-full reveal delay-300 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0a66c2] to-[#004182] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.postimg.cc/rpCz9dY0/IMG-0831-(1)2222.jpg" alt="Sidharth" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                          <div>
-                            <div class="font-bold text-sm text-black leading-tight">Sidharth Thombrakudiyil</div>
-                            <div class="text-xs text-gray-500">1w • <i class="fas fa-globe-americas"></i></div>
+                            <div class="font-extrabold text-base text-brand-black leading-tight">Sidharth Thombrakudiyil</div>
+                            <div class="text-xs text-gray-500 font-medium mt-0.5">1w • <i class="fas fa-globe-americas"></i></div>
                         </div>
-                         <div class="ml-auto text-brand-purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                         <div class="ml-auto text-[#0a66c2] bg-[#0a66c2]/10 p-2 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </div>
                     </div>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                    <p class="text-gray-700 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
                         I'm immensely proud and grateful to be honoured with this prestigious "Student-Staff Partnership of the Year" award by the Faculty of Arts, Humanities and Cultures, University of Leeds.
                     </p>
-                    <div class="rounded-xl overflow-hidden mt-auto border border-gray-100">
-                         <img src="https://i.postimg.cc/hGrfsfQv/Screenshot-2025-12-16-062703.png" alt="Students" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="rounded-2xl overflow-hidden mt-auto border border-gray-100">
+                         <img src="https://i.postimg.cc/hGrfsfQv/Screenshot-2025-12-16-062703.png" alt="Students" class="w-full h-56 object-cover img-zoom">
                     </div>
-                     <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400 font-medium">
-                        <span>210 likes</span>
-                        <span>45 comments</span>
+                     <div class="mt-6 pt-5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-bold">
+                        <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-[10px]">👍</span> 210 likes</span>
+                        <span class="hover:text-[#0a66c2] transition-colors">45 comments</span>
                     </div>
                 </a>
             </div>
-             <div class="text-center mt-12 reveal delay-400">
-                <a href="https://www.linkedin.com/in/sidharththombrakudiyil" target="_blank" class="btn-primary w-full sm:w-auto">
+             <div class="text-center mt-16 reveal delay-400">
+                <a href="https://www.linkedin.com/in/sidharththombrakudiyil" target="_blank" class="btn-primary w-full sm:w-auto hover:!bg-gradient-to-r hover:!from-[#0a66c2] hover:!to-[#004182]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     Connect on LinkedIn
                 </a>
@@ -622,11 +665,21 @@ Dialogue</h3>
     </section>
 
     <!-- References -->
-    <section id="references" class="py-16 md:py-24 px-6 max-w-6xl mx-auto reveal">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-10 md:mb-16 text-center">References</h2>
+    <section id="references" class="py-20 md:py-32 px-6 max-w-5xl mx-auto reveal relative">
+        <!-- Giant background quotation mark -->
+        <div class="absolute top-20 left-10 md:left-20 text-[15rem] leading-none text-brand-purple/5 font-serif select-none -z-10">
+            "
+        </div>
         
-        <div class="max-w-4xl mx-auto p-8 md:p-12 border-l-4 border-brand-purple bg-gray-50 rounded-r-2xl shadow-sm">
-            <div class="space-y-4 md:space-y-6 text-base md:text-lg text-gray-700 italic mb-8">
+        <div class="text-center mb-16 md:mb-20">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-black tracking-tight">References</h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-brand-purple to-brand-purpleLight mx-auto mt-6 rounded-full"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto p-10 md:p-16 border-l-[6px] border-brand-purple glass-card rounded-[2.5rem] shadow-soft rounded-l-none relative overflow-hidden z-10">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-purple/10 rounded-full filter blur-[40px] -z-10"></div>
+            
+            <div class="space-y-6 text-lg md:text-xl text-gray-700 italic mb-10 leading-relaxed font-medium">
                 <p>
                     "I have had the pleasure of managing Sid during his six months as a Student Education Service Assistant, where he has been a highly valued member of the team. Sid is consistently professional, motivated, and very capable in number of areas, approaching his work with reliability and a positive attitude.
                 </p>
@@ -637,35 +690,48 @@ Dialogue</h3>
                     Sid works collaboratively, takes initiative, and consistently delivers high-quality work. I would highly recommend him and am confident he will continue to make a strong contribution wherever he goes."
                 </p>
             </div>
-            <div class="border-t border-gray-200 pt-6">
-                <div class="font-bold text-black text-lg">Lewis Green</div>
-                <div class="text-sm text-brand-purple font-semibold mt-1">Student Education Experience Manager</div>
+            <div class="border-t border-gray-200/60 pt-8 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-purple font-extrabold text-xl">L</div>
+                <div>
+                    <div class="font-extrabold text-brand-black text-xl">Lewis Green</div>
+                    <div class="text-sm text-brand-purple font-bold mt-1">Student Education Experience Manager</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-16 md:py-24 px-6 bg-brand-purple text-white text-center">
-        <div class="max-w-4xl mx-auto reveal">
-            <h2 class="text-4xl md:text-6xl font-extrabold mb-10 md:mb-12">Connect with me.</h2>
+    <section id="contact" class="py-24 md:py-32 px-6 bg-brand-black text-white text-center relative overflow-hidden">
+        <!-- Abstract gradient background for contact -->
+        <div class="absolute inset-0 opacity-40">
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-purple rounded-full mix-blend-screen filter blur-[100px] opacity-70"></div>
+            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-brand-purpleLight rounded-full mix-blend-screen filter blur-[100px] opacity-70"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto reveal relative z-10">
+            <h2 class="text-5xl md:text-7xl font-extrabold mb-12 tracking-tight">Connect with me.</h2>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
-                <a href="tel:+447741519675" class="w-full sm:w-auto px-8 py-4 bg-white text-brand-purple font-bold rounded-full hover:bg-black hover:text-white transition-all duration-300 shadow-xl flex justify-center items-center">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-5 md:gap-8">
+                <a href="tel:+447741519675" class="w-full sm:w-auto px-10 py-5 bg-white text-brand-black font-extrabold rounded-full hover:bg-brand-purple hover:text-white transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-glow hover:scale-105 flex justify-center items-center text-lg">
                     Call Me Now
                 </a>
-                <a href="mailto:siddart17@gmail.com" class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-brand-purple transition-all duration-300 flex justify-center items-center">
+                <a href="mailto:siddart17@gmail.com" class="w-full sm:w-auto px-10 py-5 bg-white/5 backdrop-blur-md border border-white/20 text-white font-extrabold rounded-full hover:bg-white hover:text-brand-black transition-all duration-300 hover:scale-105 flex justify-center items-center text-lg">
                     Email Me
                 </a>
             </div>
 
-            <div class="flex justify-center gap-8 mt-12 md:mt-16">
-                <a href="https://www.linkedin.com/in/sidharththombrakudiyil" target="_blank" class="hover:text-black transition-colors underline">LinkedIn</a>
-                <a href="https://wa.me/447741519675" target="_blank" class="hover:text-black transition-colors underline">WhatsApp</a>
+            <div class="flex justify-center gap-10 mt-16 md:mt-20 font-bold text-gray-400">
+                <a href="https://www.linkedin.com/in/sidharththombrakudiyil" target="_blank" class="hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="group-hover:-translate-y-1 transition-transform">LinkedIn</span> ↗
+                </a>
+                <a href="https://wa.me/447741519675" target="_blank" class="hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="group-hover:-translate-y-1 transition-transform">WhatsApp</span> ↗
+                </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 text-center text-gray-500 text-sm bg-black text-white">
+    <footer class="py-8 px-6 text-center text-gray-500 font-medium text-sm bg-brand-black/95 text-white border-t border-white/10">
         <p>&copy; 2024 Sidharth Thombrakudiyil Biju. All Rights Reserved.</p>
     </footer>
 
@@ -677,7 +743,7 @@ Dialogue</h3>
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -685,6 +751,16 @@ Dialogue</h3>
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
+        const nav = document.querySelector('nav');
+
+        // Add shadow to nav on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-soft');
+            } else {
+                nav.classList.remove('shadow-soft');
+            }
+        });
 
         if (btn && menu) {
             btn.addEventListener('click', () => {
